@@ -8,7 +8,7 @@ class Downloader:
     def __init__(self, segments, request_headers):
         self.threads           = []
         self.threads_count     = 0
-        self.threads_limit     = 100
+        self.threads_limit     = 50
 
         self.segments          = segments
         self.segments_count    = len(segments)
@@ -24,15 +24,21 @@ class Downloader:
         self.threads.clear()
 
 
+    def save(self, filename, response):
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+
+
     def thread_job(self, filename, segment):
         try:
             response = requests.get(segment, headers = self.requests_headers)
-            with open(filename, 'wb') as f:
-                f.write(response.content)
-
-        except:
+            if response.status_code != 200:
+                raise Exception
+        except Exception:
             time.sleep(5)
             self.thread_job(filename, segment)
+        else:
+            self.save(filename, response)
 
 
     def download(self):
