@@ -5,7 +5,7 @@ import threading
 
 class Downloader:
 
-    def __init__(self, segments, request_headers):
+    def __init__(self, segments, request_headers, requests_callback):
         self.threads           = []
         self.threads_count     = 0
         self.threads_limit     = 50
@@ -14,6 +14,7 @@ class Downloader:
         self.segments_count    = len(segments)
 
         self.requests_headers  = request_headers
+        self.requests_callback = requests_callback
 
 
     def wait_threads(self):
@@ -39,6 +40,7 @@ class Downloader:
             self.thread_job(filename, segment)
         else:
             self.save(filename, response)
+            self.requests_callback()
 
 
     def download(self):
