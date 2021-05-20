@@ -4,6 +4,7 @@ from .downloader import Downloader
 from .segments   import Segments
 
 
+import sys
 from tqdm import tqdm
 from datetime import datetime
 
@@ -35,9 +36,10 @@ def main():
     video.get_metadata()
 
 
-    bar = tqdm(total = len(video.segments), desc = '[INFO] Downloading ...', leave = True)
+    bar = tqdm(total = len(video.segments), desc = '[INFO] Downloading ...', file = sys.stdout)
     downloader = Downloader(video.segments, requests_headers, requests_callback)
     downloader.download()
+    bar.close()
 
 
     segments = Segments(len(video.segments))
