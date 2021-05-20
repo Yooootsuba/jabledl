@@ -3,4 +3,4 @@ __pycache__/
 *.swp
 build/
 dist/
-UNKNOWN.egg-info/
+jabledl.egg-info/
