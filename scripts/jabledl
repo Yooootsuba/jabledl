@@ -1,0 +1,5 @@
+#! /usr/bin/python3
+from jabledl.jabledl import main
+
+if __name__ == '__main__':
+    main()
