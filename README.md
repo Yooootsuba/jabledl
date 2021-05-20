@@ -2,9 +2,13 @@
 
 jabledl is a video downloader for Jable TV.
 
+## Screenshot
+
+![](./demo.png)
+
 ## Dependency
 
-ccat.sh depends on [FFmpeg](https://www.ffmpeg.org/) to convert MPEG2-TS file to MP4.
+jabledl depends on [FFmpeg](https://www.ffmpeg.org/) to convert MPEG2-TS file to MP4.
 
 ## Install
 
@@ -22,8 +26,16 @@ $ sudo python3 setup.py install
 
 ## Usage
 
+Interactive mode
+
 ```
 $ jabledl
+```
+
+Non-interactive mode
+
+```
+$ jabledl -i https://jable.tv/videos/CAT-NUMBER/
 ```
 
 ## License
