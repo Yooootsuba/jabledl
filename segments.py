@@ -5,7 +5,7 @@ from Crypto.Cipher import AES
 
 class Segments:
 
-    def __init__(self, size, filename):
+    def __init__(self, size):
         self.size = size
 
 
@@ -28,7 +28,7 @@ class Segments:
 
 
     def convert(self, filename):
-        os.system('ffmpeg -hide_banner -loglevel error -i in.ts -c copy ' + filename)
+        os.system('ffmpeg -hide_banner -loglevel error -y -i in.ts -c copy ' + filename)
 
 
     def clean(self):
