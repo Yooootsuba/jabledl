@@ -35,7 +35,7 @@ $ jabledl
 Non-interactive mode
 
 ```
-$ jabledl -i https://jable.tv/videos/CAT-NUMBER/
+$ jabledl -i https://jable.tv/videos/CAR-NUMBER/
 ```
 
 ## License
