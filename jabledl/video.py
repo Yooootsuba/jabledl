@@ -20,12 +20,13 @@ class Video:
         self.m3u8_is_encrypted = None
 
         ''' HTML parser '''
+        self.html              = None
         self.soup              = None
 
 
     def get_metadata(self):
-        response  = requests.get(self.url)
-        self.soup = BeautifulSoup(response.text, 'html.parser')
+        self.html = requests.get(self.url).text
+        self.soup = BeautifulSoup(self.html, 'html.parser')
 
         self.get_car_number()
         self.get_m3u8_url()
@@ -47,7 +48,7 @@ class Video:
 
 
     def get_m3u8_url(self):
-        self.m3u8_url = self.soup.find('link', attrs = {'rel' : 'preload'}).get('href')
+        self.m3u8_url = re.search('https://.*m3u8', self.html).group(0)
 
 
     def get_segments(self):
