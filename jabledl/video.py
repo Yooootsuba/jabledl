@@ -23,9 +23,18 @@ class Video:
         self.html              = None
         self.soup              = None
 
+        '''Requests headers'''
+        self.requests_headers = {'User-Agent' : 'Mozilla/5.0 \
+                                  (X11; Linux x86_64)        \
+                                  AppleWebKit/537.36         \
+                                  (KHTML, like Gecko)        \
+                                  Chrome/90.0.4430.212       \
+                                  Safari/537.36'             \
+                                }
+
 
     def get_metadata(self):
-        self.html = requests.get(self.url).text
+        self.html = requests.get(self.url, headers = self.requests_headers).text
         self.soup = BeautifulSoup(self.html, 'html.parser')
 
         self.get_car_number()
@@ -61,15 +70,8 @@ class Video:
 
 
     def get_aes_key(self):
-        headers = {'User-Agent' : 'Mozilla/5.0 \
-                    (X11; Linux x86_64)        \
-                    AppleWebKit/537.36         \
-                    (KHTML, like Gecko)        \
-                    Chrome/90.0.4430.212       \
-                    Safari/537.36'             \
-                  }
         url = re.sub('([^\/]+).$', self.m3u8.keys[0].uri, self.m3u8_url)
-        self.aes_key = requests.get(url, headers = headers).content.hex()
+        self.aes_key = requests.get(url, headers = self.requests_headers).content.hex()
 
 
     def get_aes_iv(self):
